@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>键盘练习台</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">K</span>
+          <div>
+            <h1>键盘练习台</h1>
+            <p>中小学键盘基础训练</p>
+          </div>
+        </div>
+        <div class="top-actions" aria-label="练习操作">
+          <button class="icon-button" id="restartBtn" type="button" title="重开">
+            <span aria-hidden="true">↻</span>
+            <span>重开</span>
+          </button>
+          <button class="icon-button" id="pauseBtn" type="button" title="暂停">
+            <span aria-hidden="true" id="pauseIcon">Ⅱ</span>
+            <span id="pauseText">暂停</span>
+          </button>
+        </div>
+      </header>
+
+      <main class="practice-layout">
+        <aside class="panel settings-panel" aria-labelledby="settingsTitle">
+          <h2 id="settingsTitle">练习设置</h2>
+
+          <label class="field">
+            <span>年级</span>
+            <select id="levelSelect">
+              <option value="starter">小学低年级</option>
+              <option value="primary">小学高年级</option>
+              <option value="middle">初中</option>
+            </select>
+          </label>
+
+          <div class="field">
+            <span>类型</span>
+            <div class="mode-list" role="group" aria-label="练习类型">
+              <button class="mode-button is-active" type="button" data-mode="keys">基础按键</button>
+              <button class="mode-button" type="button" data-mode="home">主键盘区</button>
+              <button class="mode-button" type="button" data-mode="words">单词</button>
+              <button class="mode-button" type="button" data-mode="sentences">短句</button>
+              <button class="mode-button" type="button" data-mode="symbols">符号</button>
+            </div>
+          </div>
+
+          <label class="field">
+            <span>时长</span>
+            <select id="durationSelect">
+              <option value="60">1 分钟</option>
+              <option value="120" selected>2 分钟</option>
+              <option value="180">3 分钟</option>
+              <option value="300">5 分钟</option>
+            </select>
+          </label>
+
+          <label class="toggle">
+            <input id="strictMode" type="checkbox" />
+            <span>错误需改正</span>
+          </label>
+
+          <div class="finger-map" aria-label="手指分区">
+            <h3>手指分区</h3>
+            <div class="legend-item"><span class="dot zone-left-pinky"></span>左小指</div>
+            <div class="legend-item"><span class="dot zone-left-ring"></span>左无名指</div>
+            <div class="legend-item"><span class="dot zone-left-middle"></span>左中指</div>
+            <div class="legend-item"><span class="dot zone-left-index"></span>左食指</div>
+            <div class="legend-item"><span class="dot zone-right-index"></span>右食指</div>
+            <div class="legend-item"><span class="dot zone-right-middle"></span>右中指</div>
+            <div class="legend-item"><span class="dot zone-right-ring"></span>右无名指</div>
+            <div class="legend-item"><span class="dot zone-right-pinky"></span>右小指</div>
+          </div>
+        </aside>
+
+        <section class="trainer" aria-label="键盘练习">
+          <div class="trainer-head">
+            <div class="chips">
+              <span class="chip" id="modeName">基础按键</span>
+              <span class="chip chip-muted" id="levelName">小学低年级</span>
+            </div>
+            <div class="timer" aria-label="剩余时间">
+              <span id="timeLeft">02:00</span>
+              <div class="timer-track"><span id="timeBar"></span></div>
+            </div>
+          </div>
+
+          <div class="prompt-wrap">
+            <div class="prompt" id="prompt" aria-label="练习文本"></div>
+          </div>
+
+          <div class="input-wrap">
+            <label class="sr-only" for="typingInput">输入练习内容</label>
+            <textarea
+              id="typingInput"
+              rows="3"
+              autocomplete="off"
+              autocorrect="off"
+              autocapitalize="off"
+              spellcheck="false"
+              placeholder="在这里输入"
+            ></textarea>
+            <div class="feedback" id="feedback" role="status">准备</div>
+          </div>
+
+          <div class="stats-grid" aria-label="练习数据">
+            <div class="stat">
+              <span>正确率</span>
+              <strong id="accuracy">100%</strong>
+            </div>
+            <div class="stat">
+              <span>速度</span>
+              <strong id="speed">0</strong>
+              <small>字/分</small>
+            </div>
+            <div class="stat">
+              <span>连对</span>
+              <strong id="streak">0</strong>
+            </div>
+            <div class="stat">
+              <span>错键</span>
+              <strong id="mistakes">0</strong>
+            </div>
+          </div>
+
+          <div class="keyboard" id="keyboard" aria-label="可视化键盘"></div>
+        </section>
+
+        <aside class="panel coach-panel" aria-labelledby="coachTitle">
+          <img class="guide-visual" src="./assets/keyboard-guide.svg" alt="" />
+          <h2 id="coachTitle">节奏板</h2>
+          <div class="focus-key">
+            <span>下一键</span>
+            <strong id="nextKey">A</strong>
+          </div>
+          <div class="coach-row">
+            <span>手指</span>
+            <strong id="fingerHint">左小指</strong>
+          </div>
+          <div class="coach-row">
+            <span>进度</span>
+            <strong id="progressText">0 / 0</strong>
+          </div>
+          <div class="coach-row">
+            <span>难点键</span>
+            <strong id="troubleKeys">暂无</strong>
+          </div>
+          <button class="primary-button" id="nextLessonBtn" type="button">下一组</button>
+        </aside>
+      </main>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
