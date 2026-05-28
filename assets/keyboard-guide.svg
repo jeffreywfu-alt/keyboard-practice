@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 300" role="img" aria-label="keyboard hand guide">
+  <rect width="640" height="300" fill="#fffcf7"/>
+  <rect x="66" y="76" width="508" height="152" rx="16" fill="#172026"/>
+  <rect x="84" y="94" width="472" height="116" rx="10" fill="#fffaf2"/>
+  <g stroke="#172026" stroke-width="5">
+    <rect x="112" y="116" width="42" height="28" rx="5" fill="#ffd1d1"/>
+    <rect x="164" y="116" width="42" height="28" rx="5" fill="#ffe6a6"/>
+    <rect x="216" y="116" width="42" height="28" rx="5" fill="#cbe7ff"/>
+    <rect x="268" y="116" width="42" height="28" rx="5" fill="#c7f3df"/>
+    <rect x="330" y="116" width="42" height="28" rx="5" fill="#cfddff"/>
+    <rect x="382" y="116" width="42" height="28" rx="5" fill="#e2d1ff"/>
+    <rect x="434" y="116" width="42" height="28" rx="5" fill="#ffd1ef"/>
+    <rect x="486" y="116" width="42" height="28" rx="5" fill="#d2f0ef"/>
+    <rect x="144" y="158" width="352" height="28" rx="5" fill="#fff0ad"/>
+  </g>
+  <path d="M176 252c-36-14-65-38-72-70-5-23 11-42 34-34 16 6 24 21 33 38 5-35 16-76 37-78 17-1 24 16 23 37 12-29 27-57 47-54 19 4 20 27 12 52 18-20 39-34 53-22 17 14 3 45-17 70-33 41-91 80-150 61Z" fill="#ffe1c7" stroke="#172026" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M464 252c36-14 65-38 72-70 5-23-11-42-34-34-16 6-24 21-33 38-5-35-16-76-37-78-17-1-24 16-23 37-12-29-27-57-47-54-19 4-20 27-12 52-18-20-39-34-53-22-17 14-3 45 17 70 33 41 91 80 150 61Z" fill="#ffe1c7" stroke="#172026" stroke-width="7" stroke-linejoin="round"/>
+  <circle cx="110" cy="48" r="18" fill="#0e8f82"/>
+  <circle cx="530" cy="48" r="18" fill="#e45b3f"/>
+  <path d="M150 47h340" stroke="#172026" stroke-width="6" stroke-linecap="round" stroke-dasharray="12 16"/>
+</svg>
