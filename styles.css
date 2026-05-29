@@ -146,7 +146,7 @@ h1 {
   gap: 18px;
   max-width: 1440px;
   margin: 0 auto;
-  align-items: start;
+  align-items: stretch;
 }
 
 .panel,
@@ -491,7 +491,7 @@ textarea.ime-warning {
 .keyboard {
   display: grid;
   gap: 8px;
-  margin-top: 16px;
+  margin-top: 10px;
   overflow-x: auto;
   padding: 4px 0 2px;
 }
@@ -607,7 +607,7 @@ textarea.ime-warning {
 .coach-panel {
   grid-area: auto;
   display: grid;
-  gap: 14px;
+  gap: 12px;
   align-items: initial;
 }
 
@@ -624,6 +624,25 @@ textarea.ime-warning {
   border: 2px solid var(--ink);
   border-radius: 8px;
   background: var(--surface);
+}
+
+.coach-stats {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 0;
+}
+
+.coach-stats .stat {
+  min-height: 72px;
+  padding: 10px;
+}
+
+.coach-stats .stat strong {
+  font-size: clamp(25px, 2.4vw, 34px);
+}
+
+.coach-stats .stat small {
+  margin-top: 1px;
 }
 
 .focus-key {
@@ -757,7 +776,7 @@ textarea.ime-warning {
 
   .coach-panel {
     grid-column: 1 / -1;
-    grid-template-columns: 180px repeat(4, minmax(0, 1fr)) 140px;
+    grid-template-columns: 170px minmax(190px, 260px) repeat(3, minmax(0, 1fr)) 130px;
     align-items: center;
   }
 
@@ -767,6 +786,10 @@ textarea.ime-warning {
 
   .guide-visual {
     max-height: 110px;
+  }
+
+  .coach-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .focus-key {
@@ -833,6 +856,7 @@ textarea.ime-warning {
   }
 
   .guide-visual,
+  .coach-stats,
   .focus-key,
   .primary-button {
     grid-column: 1 / -1;
@@ -843,7 +867,7 @@ textarea.ime-warning {
     min-height: 80px;
   }
 
-  .stats-grid {
+  .trainer .stats-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
