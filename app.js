@@ -37,6 +37,90 @@ const modes = {
   },
 };
 
+modes.chinese = {
+  label: "中文练习",
+  starter: ["我们一起学习打字。", "今天阳光很好，小鸟在唱歌。", "我爱读书，也爱运动。"],
+  primary: ["每天认真练习，慢慢提高打字的速度。", "校园里绿树成荫，同学们在操场上快乐地活动。", "读一本好书，就像和一位朋友交流。"],
+  middle: ["学习需要耐心与坚持，准确输入比一味追求速度更重要。", "清晨的阳光穿过树叶，给安静的校园披上一层温暖的色彩。", "善于观察生活，认真思考问题，才能发现平凡事物中的美。"],
+};
+
+// Sentence-aligned readings preserve the intended pronunciation of polyphonic characters.
+const chineseReadings = {
+  starter: [
+    "wǒ men yì qǐ xué xí dǎ zì 。",
+    "jīn tiān yáng guāng hěn hǎo ， xiǎo niǎo zài chàng gē 。",
+    "wǒ ài dú shū ， yě ài yùn dòng 。",
+  ],
+  primary: [
+    "měi tiān rèn zhēn liàn xí ， màn màn tí gāo dǎ zì de sù dù 。",
+    "xiào yuán lǐ lǜ shù chéng yīn ， tóng xué men zài cāo chǎng shàng kuài lè de huó dòng 。",
+    "dú yì běn hǎo shū ， jiù xiàng hé yí wèi péng you jiāo liú 。",
+  ],
+  middle: [
+    "xué xí xū yào nài xīn yǔ jiān chí ， zhǔn què shū rù bǐ yí wèi zhuī qiú sù dù gèng zhòng yào 。",
+    "qīng chén de yáng guāng chuān guò shù yè ， gěi ān jìng de xiào yuán pī shàng yì céng wēn nuǎn de sè cǎi 。",
+    "shàn yú guān chá shēng huó ， rèn zhēn sī kǎo wèn tí ， cái néng fā xiàn píng fán shì wù zhōng de měi 。",
+  ],
+};
+
+const extraChineseLessons = {
+  starter: [
+    ["小猫在门口晒太阳。", "xiǎo māo zài mén kǒu shài tài yáng 。"],
+    ["妈妈带我去公园。", "mā ma dài wǒ qù gōng yuán 。"],
+    ["雨后的小草绿绿的。", "yǔ hòu de xiǎo cǎo lǜ lǜ de 。"],
+    ["我把书包放在桌上。", "wǒ bǎ shū bāo fàng zài zhuō shàng 。"],
+    ["早上好，老师好！", "zǎo shàng hǎo ， lǎo shī hǎo ！"],
+    ["你喜欢什么颜色？", "nǐ xǐ huan shén me yán sè ？"],
+    ["我们排好队去上课。", "wǒ men pái hǎo duì qù shàng kè 。"],
+    ["小鱼在水里游来游去。", "xiǎo yú zài shuǐ lǐ yóu lái yóu qù 。"],
+    ["每天早睡早起身体好。", "měi tiān zǎo shuì zǎo qǐ shēn tǐ hǎo 。"],
+  ],
+  primary: [
+    ["春风吹过田野，花儿露出笑脸。", "chūn fēng chuī guò tián yě ， huā ér lù chū xiào liǎn 。"],
+    ["遇到不懂的问题，可以请教老师。", "yù dào bù dǒng de wèn tí ， kě yǐ qǐng jiào lǎo shī 。"],
+    ["保护环境，从节约每一滴水开始。", "bǎo hù huán jìng ， cóng jié yuē měi yì dī shuǐ kāi shǐ 。"],
+    ["下课以后，我们一起整理教室。", "xià kè yǐ hòu ， wǒ men yì qǐ zhěng lǐ jiào shì 。"],
+    ["夜空中有许多星星，你看见了吗？", "yè kōng zhōng yǒu xǔ duō xīng xing ， nǐ kàn jiàn le ma ？"],
+    ["认真观察，才能发现更多有趣的事。", "rèn zhēn guān chá ， cái néng fā xiàn gèng duō yǒu qù de shì 。"],
+    ["周末，我和家人一起做了一顿午饭。", "zhōu mò ， wǒ hé jiā rén yì qǐ zuò le yí dùn wǔ fàn 。"],
+    ["秋天到了，金黄的树叶轻轻落下。", "qiū tiān dào le ， jīn huáng de shù yè qīng qīng luò xià 。"],
+    ["答应别人的事情，要努力做到。", "dā ying bié rén de shì qing ， yào nǔ lì zuò dào 。"],
+  ],
+  middle: [
+    ["面对困难时，先分析原因，再寻找合适的解决方法。", "miàn duì kùn nan shí ， xiān fēn xī yuán yīn ， zài xún zhǎo hé shì de jiě jué fāng fǎ 。"],
+    ["合理安排学习与休息的时间，有助于保持良好的状态。", "hé lǐ ān pái xué xí yǔ xiū xi de shí jiān ， yǒu zhù yú bǎo chí liáng hǎo de zhuàng tài 。"],
+    ["阅读让我们了解不同的世界，也帮助我们认识自己。", "yuè dú ràng wǒ men liǎo jiě bù tóng de shì jiè ， yě bāng zhù wǒ men rèn shi zì jǐ 。"],
+    ["网络信息丰富多样，我们需要学会判断与选择。", "wǎng luò xìn xī fēng fù duō yàng ， wǒ men xū yào xué huì pàn duàn yǔ xuǎn zé 。"],
+    ["团队合作需要倾听他人的意见，也需要清楚地表达想法。", "tuán duì hé zuò xū yào qīng tīng tā rén de yì jiàn ， yě xū yào qīng chu de biǎo dá xiǎng fǎ 。"],
+    ["记录每天的进步，可以让坚持变得更有方向。", "jì lù měi tiān de jìn bù ， kě yǐ ràng jiān chí biàn de gèng yǒu fāng xiàng 。"],
+    ["科学探索始于好奇，也离不开严谨的观察与实验。", "kē xué tàn suǒ shǐ yú hào qí ， yě lí bù kāi yán jǐn de guān chá yǔ shí yàn 。"],
+    ["尊重不同的观点，有助于我们更全面地理解问题。", "zūn zhòng bù tóng de guān diǎn ， yǒu zhù yú wǒ men gèng quán miàn de lǐ jiě wèn tí 。"],
+    ["把目标分成具体的小步骤，然后认真完成每一步。", "bǎ mù biāo fēn chéng jù tǐ de xiǎo bù zhòu ， rán hòu rèn zhēn wán chéng měi yí bù 。"],
+  ],
+};
+for (const level of Object.keys(extraChineseLessons)) {
+  for (const [text, reading] of extraChineseLessons[level]) {
+    modes.chinese[level].push(text);
+    chineseReadings[level].push(reading);
+  }
+}
+const lessonPositions = {};
+
+function pinyinAt(index) {
+  if (state.mode !== "chinese") return "";
+  const lesson = modes.chinese[state.level].indexOf(state.target);
+  const reading = chineseReadings[state.level][lesson];
+  const syllable = reading ? reading.split(" ")[index] || "" : "";
+  return /[\u4e00-\u9fff]/.test(state.target[index] || "") ? syllable : "";
+}
+
+for (const mode of ["keys", "home"]) {
+  for (const level of Object.keys(levels)) {
+    modes[mode][level] = modes[mode][level].map(text =>
+      /[a-z]/i.test(text) ? text + " " + text.toUpperCase() : text + " aA sS dD fF jJ kK lL");
+  }
+}
+
 const keyboardRows = [
   [
     ["`", "`", "", "", "~"],
@@ -283,8 +367,11 @@ function createKeyLabel(text, className) {
 
 function chooseTarget() {
   const bank = modes[state.mode][state.level];
-  const index = Math.floor(Math.random() * bank.length);
-  let target = bank[index].toLowerCase();
+  const key = state.mode + ":" + state.level;
+  const index = lessonPositions[key] || 0;
+  const lessonLabel = document.querySelector("#lessonNumber");
+  if (lessonLabel) lessonLabel.textContent = "第 " + (index + 1) + " / " + bank.length + " 组";
+  let target = bank[index];
 
   if (state.mode === "keys" || state.mode === "home") {
     const parts = target.split(" ");
@@ -336,7 +423,8 @@ function resetLesson(keepMode = true) {
   elements.pauseIcon.textContent = "Ⅱ";
   elements.pauseText.textContent = "暂停";
   elements.pauseBtn.title = "暂停";
-  setFeedback("准备", "");
+  state.chineseValue = "";
+  setFeedback(state.mode === "chinese" ? "请切换中文输入法，输入汉字及中文标点" : "准备", "");
   renderPrompt();
   updateStats();
   updateTimer();
@@ -354,6 +442,17 @@ function renderPrompt() {
     const span = document.createElement("span");
     span.className = "prompt-char";
     span.textContent = char === " " ? "空格" : char;
+    const pinyin = pinyinAt(i);
+    if (pinyin) {
+      const ruby = document.createElement("ruby");
+      ruby.textContent = char;
+      const rt = document.createElement("rt");
+      rt.textContent = pinyin;
+      ruby.appendChild(rt);
+      span.textContent = "";
+      span.appendChild(ruby);
+      span.classList.add("with-pinyin");
+    }
 
     if (char === " ") {
       span.classList.add("space");
@@ -377,6 +476,9 @@ function normalizedInput() {
 }
 
 function handleKeydown(event) {
+  if (event.getModifierState) state.capsLock = event.getModifierState("CapsLock");
+  updateInputHint();
+  if (state.mode === "chinese") return;
   if (state.completed || state.paused) return;
 
   if (state.composing || event.isComposing || event.key === "Process" || event.keyCode === 229) {
@@ -425,6 +527,10 @@ function handleKeydown(event) {
 }
 
 function handleInput() {
+  if (state.mode === "chinese") {
+    handleChineseInput();
+    return;
+  }
   if (state.paused) return;
 
   if (state.composing) {
@@ -470,16 +576,60 @@ function handleInput() {
   }
 }
 
+function handleChineseInput() {
+  if (state.paused || state.completed || state.composing) return;
+  let value = normalizedInput();
+  const previous = state.chineseValue || "";
+  let start = 0;
+  while (start < previous.length && start < value.length && previous[start] === value[start]) start++;
+  let suffix = 0;
+  while (suffix < previous.length - start && suffix < value.length - start &&
+    previous[previous.length - 1 - suffix] === value[value.length - 1 - suffix]) suffix++;
+  let accepted = value.slice(0, start);
+  let rejected = false;
+  for (let i = start; i < value.length - suffix; i++) {
+    const matches = value[i] === state.target[accepted.length];
+    state.attempts++;
+    if (matches) {
+      state.correctAttempts++;
+      state.streak++;
+      state.bestStreak = Math.max(state.bestStreak, state.streak);
+    } else {
+      state.streak = 0;
+      state.mistakes++;
+      const expected = state.target[accepted.length];
+      state.trouble[expected] = (state.trouble[expected] || 0) + 1;
+      if (elements.strictMode.checked) {
+        rejected = true;
+        break;
+      }
+    }
+    accepted += value[i];
+  }
+  if (!rejected && suffix) accepted += value.slice(value.length - suffix);
+  elements.input.value = accepted;
+  state.chineseValue = accepted;
+  if (!state.started && (accepted.length || state.attempts)) startTimer();
+  renderPrompt();
+  updateStats();
+  highlightNextKey();
+  if (accepted.length >= state.target.length) completeLesson();
+  else {
+    const correct = !rejected && accepted === state.target.slice(0, accepted.length);
+    setFeedback(correct ? "保持节奏" : "请检查文字和中文标点", correct ? "good" : "warn");
+  }
+}
+
 function normalizedPrintable(key) {
   if (key === " ") return " ";
-  return key.length === 1 ? key.toLowerCase() : key;
+  return key;
 }
 
 function cleanInputValue(value) {
+  if (state.mode === "chinese") return value.replace(/\\n/g, " ");
   return value
     .replace(/\n/g, " ")
-    .replace(/[^\x00-\x7F]/g, "")
-    .toLowerCase();
+    .replace(/[^\x00-\x7F]/g, "");
 }
 
 function hasNonEnglishInput(value) {
@@ -495,12 +645,12 @@ function showImeWarning() {
 function handleCompositionStart() {
   if (state.completed || state.paused) return;
   state.composing = true;
-  showImeWarning();
+  if (state.mode !== "chinese") showImeWarning();
 }
 
 function handleCompositionEnd() {
   state.composing = false;
-  if (hasNonEnglishInput(elements.input.value)) {
+  if (state.mode !== "chinese" && hasNonEnglishInput(elements.input.value)) {
     showImeWarning();
   }
   handleInput();
@@ -569,7 +719,35 @@ function countCorrectChars(value) {
   return count;
 }
 
+function updateInputHint() {
+  const hint = document.querySelector("#inputHint");
+  if (!hint) return;
+  const char = state.target[normalizedInput().length] || "";
+  hint.className = "input-hint" + (state.imeWarning ? " input-hint-alert" :
+    (/[A-Z]/.test(char) || (/[a-z]/.test(char) && state.capsLock)) && state.mode !== "chinese" ? " input-hint-case" : "");
+  if (state.imeWarning && state.mode !== "chinese" && !state.completed) {
+    hint.textContent = "⚠ 请先切换到英文输入法\n按一下 Shift 切换中 / 英\n若未切换，请使用系统输入法切换快捷键";
+    return;
+  }
+  if (state.completed) {
+    hint.textContent = "本组已结束，可点击“下一组”继续练习。";
+  } else if (state.mode === "chinese") {
+    hint.textContent = "中文输入：请切换到中文输入法，选字确认后再判定；标点也请使用中文标点。";
+  } else {
+    let text = state.imeWarning ? "请切换到英文输入法（通常按 Shift，或使用系统输入法切换快捷键）。" :
+      "英文输入：请使用英文输入法。";
+    if (/[A-Z]/.test(char)) text += state.capsLock ?
+      " 下一字母为大写 " + char + "，Caps Lock 已开启，可直接输入。" :
+      " 下一字母为大写 " + char + "，请按住 Shift + " + char + "。";
+    else if (/[a-z]/.test(char)) text += state.capsLock ?
+      " 下一字母为小写 " + char + "，请按 Caps Lock 关闭大写锁定。" :
+      " 下一字母为小写 " + char + "，请松开 Shift。";
+    hint.textContent = text;
+  }
+}
+
 function highlightNextKey() {
+  updateInputHint();
   if (state.imeWarning) {
     highlightImeSwitchKey();
     return;
@@ -580,15 +758,20 @@ function highlightNextKey() {
   const next = baseKey(char);
 
   elements.nextKey.textContent = displayChar(char);
-  elements.fingerHint.textContent = fingerByKey[next] || "看键位";
+  const pinyinLabel = document.querySelector("#nextPinyin");
+  if (pinyinLabel) pinyinLabel.textContent = pinyinAt(typed.length);
+  elements.fingerHint.textContent = state.mode === "chinese" ? "使用中文输入法" : fingerByKey[next] || "看键位";
 
   document.querySelectorAll(".key").forEach((keyElement) => {
-    keyElement.classList.toggle("next", keyElement.dataset.key === next);
+    const needsShift = /[A-Z]/.test(char) && !state.capsLock;
+    keyElement.classList.toggle("next", keyElement.dataset.key === next ||
+      (needsShift && imeSwitchKeys.includes(keyElement.dataset.key)));
     keyElement.classList.remove("ime-switch");
   });
 }
 
 function highlightImeSwitchKey() {
+  updateInputHint();
   elements.nextKey.textContent = "Shift";
   elements.fingerHint.textContent = "切换英文";
 
@@ -615,7 +798,7 @@ function baseKey(char) {
 function displayChar(char) {
   if (!char) return "完成";
   if (char === " ") return "空格";
-  return char.toUpperCase();
+  return char;
 }
 
 function troubleText() {
@@ -685,7 +868,11 @@ function bindEvents() {
   elements.levelSelect.addEventListener("change", () => resetLesson());
   elements.durationSelect.addEventListener("change", () => resetLesson());
   elements.restartBtn.addEventListener("click", () => resetLesson());
-  elements.nextLessonBtn.addEventListener("click", () => resetLesson());
+  elements.nextLessonBtn.addEventListener("click", () => {
+    const key = state.mode + ":" + state.level;
+    lessonPositions[key] = ((lessonPositions[key] || 0) + 1) % modes[state.mode][state.level].length;
+    resetLesson();
+  });
   elements.pauseBtn.addEventListener("click", togglePause);
   elements.input.addEventListener("compositionstart", handleCompositionStart);
   elements.input.addEventListener("compositionend", handleCompositionEnd);
@@ -696,3 +883,4 @@ function bindEvents() {
 buildKeyboard();
 bindEvents();
 resetLesson();
+
