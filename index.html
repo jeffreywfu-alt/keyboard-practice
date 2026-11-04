@@ -8,25 +8,7 @@
   </head>
   <body>
     <div class="app">
-      <header class="topbar">
-        <div class="brand">
-          <span class="brand-mark" aria-hidden="true">K</span>
-          <div>
-            <h1>键盘练习台</h1>
-            <p>中小学键盘基础训练</p>
-          </div>
-        </div>
-        <div class="top-actions" aria-label="练习操作">
-          <button class="icon-button" id="restartBtn" type="button" title="重开">
-            <span aria-hidden="true">↻</span>
-            <span>重开</span>
-          </button>
-          <button class="icon-button" id="pauseBtn" type="button" title="暂停">
-            <span aria-hidden="true" id="pauseIcon">Ⅱ</span>
-            <span id="pauseText">暂停</span>
-          </button>
-        </div>
-      </header>
+
 
       <main class="practice-layout">
         <aside class="panel settings-panel" aria-labelledby="settingsTitle">
@@ -83,9 +65,20 @@
 
         <section class="trainer" aria-label="键盘练习">
           <div class="trainer-head">
+<div class="top-actions" aria-label="练习操作">
+          <button class="icon-button" id="restartBtn" type="button" title="重开">
+            <span aria-hidden="true">↻</span>
+            <span>重开</span>
+          </button>
+          <button class="icon-button" id="pauseBtn" type="button" title="暂停">
+            <span aria-hidden="true" id="pauseIcon">Ⅱ</span>
+            <span id="pauseText">暂停</span>
+          </button>
+        </div>
             <div class="chips">
               <span class="chip" id="modeName">基础按键</span>
               <span class="chip chip-muted" id="levelName">小学低年级</span>
+              <span class="chip chip-muted" id="lessonNumber"></span>
             </div>
             <div class="timer" aria-label="剩余时间">
               <span id="timeLeft">02:00</span>
@@ -108,6 +101,7 @@
               spellcheck="false"
               placeholder="在这里输入"
             ></textarea>
+            <div class="input-hint" id="inputHint" role="status" aria-live="polite"></div>
             <div class="feedback" id="feedback" role="status">准备</div>
           </div>
 
@@ -139,6 +133,7 @@
           <div class="focus-key">
             <span>下一键</span>
             <strong id="nextKey">A</strong>
+            <span id="nextPinyin" class="next-pinyin"></span>
           </div>
           <div class="coach-row">
             <span>手指</span>
@@ -160,3 +155,4 @@
     <script src="./app.js"></script>
   </body>
 </html>
+
