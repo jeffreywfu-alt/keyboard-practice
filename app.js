@@ -37,6 +37,13 @@ const modes = {
   },
 };
 
+modes.chinese = {
+  label: "中文练习",
+  starter: ["我们一起学习打字。", "今天阳光很好，小鸟在唱歌。", "我爱读书，也爱运动。"],
+  primary: ["每天认真练习，慢慢提高打字的速度。", "校园里绿树成荫，同学们在操场上快乐地活动。", "读一本好书，就像和一位朋友交流。"],
+  middle: ["学习需要耐心与坚持，准确输入比一味追求速度更重要。", "清晨的阳光穿过树叶，给安静的校园披上一层温暖的色彩。", "善于观察生活，认真思考问题，才能发现平凡事物中的美。"],
+};
+
 const keyboardRows = [
   [
     ["`", "`", "", "", "~"],
@@ -336,7 +343,8 @@ function resetLesson(keepMode = true) {
   elements.pauseIcon.textContent = "Ⅱ";
   elements.pauseText.textContent = "暂停";
   elements.pauseBtn.title = "暂停";
-  setFeedback("准备", "");
+  state.chineseValue = "";
+  setFeedback(state.mode === "chinese" ? "请切换中文输入法，输入汉字及中文标点" : "准备", "");
   renderPrompt();
   updateStats();
   updateTimer();
@@ -377,6 +385,7 @@ function normalizedInput() {
 }
 
 function handleKeydown(event) {
+  if (state.mode === "chinese") return;
   if (state.completed || state.paused) return;
 
   if (state.composing || event.isComposing || event.key === "Process" || event.keyCode === 229) {
@@ -425,6 +434,10 @@ function handleKeydown(event) {
 }
 
 function handleInput() {
+  if (state.mode === "chinese") {
+    handleChineseInput();
+    return;
+  }
   if (state.paused) return;
 
   if (state.composing) {
@@ -470,12 +483,46 @@ function handleInput() {
   }
 }
 
+function handleChineseInput() {
+  if (state.paused || state.completed || state.composing) return;
+  let value = normalizedInput();
+  const previous = state.chineseValue || "";
+  let start = 0;
+  while (start < previous.length && start < value.length && previous[start] === value[start]) start++;
+  let accepted = value.slice(0, start);
+  for (let i = start; i < value.length; i++) {
+    const matches = value[i] === state.target[accepted.length];
+    state.attempts++;
+    if (matches) {
+      state.correctAttempts++;
+      state.streak++;
+      state.bestStreak = Math.max(state.bestStreak, state.streak);
+    } else {
+      state.streak = 0;
+      state.mistakes++;
+      const expected = state.target[accepted.length];
+      state.trouble[expected] = (state.trouble[expected] || 0) + 1;
+      if (elements.strictMode.checked) break;
+    }
+    accepted += value[i];
+  }
+  elements.input.value = accepted;
+  state.chineseValue = accepted;
+  if (!state.started && (accepted.length || state.attempts)) startTimer();
+  renderPrompt();
+  updateStats();
+  highlightNextKey();
+  if (accepted.length >= state.target.length) completeLesson();
+  else setFeedback(accepted === state.target.slice(0, accepted.length) ? "保持节奏" : "请检查文字和中文标点", "good");
+}
+
 function normalizedPrintable(key) {
   if (key === " ") return " ";
   return key.length === 1 ? key.toLowerCase() : key;
 }
 
 function cleanInputValue(value) {
+  if (state.mode === "chinese") return value.replace(/\\n/g, " ");
   return value
     .replace(/\n/g, " ")
     .replace(/[^\x00-\x7F]/g, "")
@@ -495,12 +542,12 @@ function showImeWarning() {
 function handleCompositionStart() {
   if (state.completed || state.paused) return;
   state.composing = true;
-  showImeWarning();
+  if (state.mode !== "chinese") showImeWarning();
 }
 
 function handleCompositionEnd() {
   state.composing = false;
-  if (hasNonEnglishInput(elements.input.value)) {
+  if (state.mode !== "chinese" && hasNonEnglishInput(elements.input.value)) {
     showImeWarning();
   }
   handleInput();
@@ -580,7 +627,7 @@ function highlightNextKey() {
   const next = baseKey(char);
 
   elements.nextKey.textContent = displayChar(char);
-  elements.fingerHint.textContent = fingerByKey[next] || "看键位";
+  elements.fingerHint.textContent = state.mode === "chinese" ? "使用中文输入法" : fingerByKey[next] || "看键位";
 
   document.querySelectorAll(".key").forEach((keyElement) => {
     keyElement.classList.toggle("next", keyElement.dataset.key === next);
