@@ -608,6 +608,7 @@ textarea.ime-warning {
   grid-area: auto;
   display: grid;
   gap: 12px;
+  align-content: start;
   align-items: initial;
 }
 
